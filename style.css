@@ -1,0 +1,146 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+:root{
+    --campo-size: 100px;
+    --mark-size: calc(var(--campo-size)* .9)
+}
+
+body {
+    margin: 0;
+}
+
+.tabuleiro {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3,auto);
+}
+
+
+.campo{
+    width: var(--campo-size);
+    height: var(--campo-size);
+   border: 1px solid #000000;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+   cursor: pointer;
+}
+
+.campo:first-child,
+.campo:nth-child(2),
+.campo:nth-child(3){
+    border-top: none;
+}
+
+.campo:nth-child(3n + 1){
+    border-left: none;
+}
+
+.campo:nth-child(3n + 3){
+    border-right: none;
+}
+.campo:last-child,
+.campo:nth-child(8),
+.campo:nth-child(7){
+    border-bottom: none;
+}
+
+.campo.x,
+.campo.circulo{
+    cursor: not-allowed;
+}
+.campo.campo.x::before,
+.campo.x::after,
+.campo.circulo::before,
+.campo.circulo::after{
+    background-color: #000000;
+}
+
+.tabuleiro.x .campo:not(.x):not(.circulo):hover::before,
+.tabuleiro.x .campo:not(.x):not(.circulo):hover::after,
+.tabuleiro.circulo .campo:not(.x):not(.circulo):hover::before,
+.tabuleiro.circulo .campo:not(.x):not(.circulo):hover::after{
+    background-color: #5c5c5c;
+}
+
+.campo.x::before,
+.campo.x::after,
+.tabuleiro.x .campo:not(.x):not(.circulo):hover::before,
+.tabuleiro.x .campo:not(.x):not(.circulo):hover::after{
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size)* .15);
+    height: var(--mark-size);
+    
+}
+.campo.x::before,
+.tabuleiro.x .campo:not(.x):not(.circulo):hover::before{
+    transform: rotate(45deg);
+}
+.campo.x::after,
+.tabuleiro.x .campo:not(.x):not(.circulo):hover::after{
+    transform: rotate(-45deg);
+}
+
+.campo.circulo::before,
+.campo.circulo::after,
+.tabuleiro.circulo .campo:not(.x):not(.circulo):hover::before,
+.tabuleiro.circulo .campo:not(.x):not(.circulo):hover::after{
+    content: '';
+    position: absolute;
+    border-radius: 50%;   
+}
+.campo.circulo::before,
+.tabuleiro.circulo .campo:not(.x):not(.circulo):hover::before{
+    width: var(--mark-size);
+    height: var(--mark-size);
+    
+  
+}
+.campo.circulo::after,
+.tabuleiro.circulo .campo:not(.x):not(.circulo):hover::after{
+    width: calc(var(--mark-size)* .7 ) ;
+    height: calc(var(--mark-size)* .7 );
+    background-color: #ffffff;
+  
+}
+.fim{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size:  5rem;
+    flex-direction: column;
+}
+
+.fim button{
+    font-size:  3rem;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    padding:  .25em .5em;
+    cursor: pointer;
+}
+
+.fim button:hover{
+    background-color: #000000;
+    color: #ffffff ;
+    border-color: #ffffff;
+}
+
+.fim.exibir{
+    display: flex;
+}
